@@ -7,6 +7,7 @@ pygame.init()
 
 window_width = 800
 window_height = 600
+road_width = 200  
 
 screen = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption("Self Driving Car")
@@ -14,12 +15,11 @@ icon = pygame.image.load("logo.png")
 pygame.display.set_icon(icon)
 
 # Create the Road object
-road_width = 200  
 road = road.Road(road_width, lane_count=3, window_width=window_width, window_height=window_height)
+
 
 # Create the PlayerCar object and define which lane to spawn
 player_car = car.PlayerCar(road.get_lane_center(1), window_height - 75, 30, 45, (255, 0, 0))
-
 # Create a controls instance
 controls = controls.Controls()
 
