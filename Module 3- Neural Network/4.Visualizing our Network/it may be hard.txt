@@ -1,3 +1,0 @@
-will do this later:
-
-it maybe hard because we are moving our screen based on car's y-axis
