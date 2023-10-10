@@ -18,12 +18,12 @@ class PlayerCar:
         
         if self.controls.forward:
             self.y-=3
+        if self.controls.reverse:
+            self.y+=3
         if self.controls.left:
             self.x-=3
         if self.controls.right:
             self.x+=3
-        if self.controls.reverse:
-            self.y+=3
 
 
     def draw(self, screen):
