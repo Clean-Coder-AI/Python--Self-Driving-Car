@@ -46,6 +46,6 @@ while running:
     player_car.draw(screen)
 
     #Update the display
-    pygame.display.update()
+    pygame.display.flip()
 
 pygame.quit()

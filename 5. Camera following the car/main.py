@@ -52,6 +52,6 @@ while running:
     player_car.draw(screen, camera_y)
 
     #Update the display
-    pygame.display.update()
+    pygame.display.flip()
 
 pygame.quit()

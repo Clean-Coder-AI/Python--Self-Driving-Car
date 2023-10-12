@@ -46,7 +46,7 @@ while running:
     our_road.draw(screen, camera_y)
 
     #Update the player car
-    player_car.update(keys, our_road.borders)
+    player_car.update(keys, our_road.borders, our_road.border_lines)
 
     #Draw the player car
     player_car.draw(screen, camera_y)

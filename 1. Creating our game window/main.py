@@ -30,6 +30,6 @@ while running:
     #fill with a background color
     screen.fill((255,255,255))  #White background - RGB color model
     #Update the display
-    pygame.display.update()
+    pygame.display.flip()
 
 pygame.quit()
