@@ -36,7 +36,7 @@ class PlayerCar:
             self.sensor.update(road_borders)
         
     def check_damage(self, border_lines):
-        car_rect=pygame.Rect(self.x, self.y, self.width, self.height)
+        car_rect=pygame.Rect(self.x-(self.width/2), self.y, self.width, self.height)
         for line in border_lines:
             if car_rect.clipline(line):
                 print("Collide!")
