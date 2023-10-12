@@ -11,11 +11,18 @@ class Road:
         #Calculate the road position 
         self.x=(window_width-width)/2
         self.y=(height-window_height)/2 
-    
-    #We will need this later for sensor and collision detection
-    def get_borders():
-        pass
 
+        #Calculate road borders which we will use for sensor and collision detection
+        top_left={'x':self.x, 'y':self.y}
+        top_right={'x':self.x+self.width, 'y':self.y}
+        bottom_left={'x':self.x, 'y':self.y+self.height}
+        bottom_right={'x':self.x+self.width, 'y':self.y+self.height}
+
+        self.borders=[
+            [top_left, bottom_left],
+            [top_right, bottom_right]
+        ]  
+    
     def get_lane_center(self, lane_index):
         lane_width=self.width/self.lane_count
         return self.x +lane_width*lane_index +lane_width/2

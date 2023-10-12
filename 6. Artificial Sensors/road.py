@@ -21,13 +21,13 @@ class Road:
         self.borders=[
             [top_left, bottom_left],
             [top_right, bottom_right]
-        ]  
+        ]    
 
     def get_lane_center(self, lane_index):
         lane_width=self.width/self.lane_count
         return self.x +lane_width*lane_index +lane_width/2
 
-    def draw(self, screen):
+    def draw(self, screen, camera_y):
         road_color=(128,128,128) #gray
         lane_color=(255,255,255) #white
         border_color=(255,255,0) #yellow
@@ -36,11 +36,11 @@ class Road:
         lane_width=self.width/self.lane_count
 
         #Fill the road area with the road color
-        pygame.draw.rect(screen, road_color, (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(screen, road_color, (self.x, self.y-camera_y, self.width, self.height))
 
         #Draw road borders 
-        pygame.draw.line(screen, border_color, (self.x, self.y),(self.x, self.y+self.height), border_width)
-        pygame.draw.line(screen, border_color, (self.x+self.width, self.y),(self.x+self.width, self.y+self.height), border_width)
+        pygame.draw.line(screen, border_color, (self.x, self.y-camera_y),(self.x, self.y-camera_y+self.height), border_width)
+        pygame.draw.line(screen, border_color, (self.x+self.width, self.y-camera_y),(self.x+self.width, self.y-camera_y+self.height), border_width)
 
         #Draw dashed lines for inner lanes
         dash_length=20
@@ -48,4 +48,4 @@ class Road:
         for i in range(1,self.lane_count):
             x=self.x+ lane_width*i
             for y in range(0,self.height,dash_length*2):
-                pygame.draw.line(screen, lane_color, (x,y+self.y), (x, y+dash_length+self.y), lane_thickness)
+                pygame.draw.line(screen, lane_color, (x,y+self.y-camera_y), (x, y+dash_length+self.y-camera_y), lane_thickness)
