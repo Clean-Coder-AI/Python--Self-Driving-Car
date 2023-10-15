@@ -32,7 +32,7 @@ class Car:
     
 
         self.rect = pygame.Rect(self.x,self.y,self.width,self.height)
-        self.polygon=self.polygon_points(self.rect)
+        self.polygon=self.polygon_points()
 
     
     def update(self, keys, road_borders, border_lines, traffics):
@@ -40,7 +40,7 @@ class Car:
             self.controls.update(keys)
             self.move()
             self.rect.topleft = (self.x, self.y)
-            self.polygon=self.polygon_points(self.rect)
+            self.polygon=self.polygon_points()
             self.damaged=self.check_damage(border_lines,traffics)
         if hasattr(self,'sensor'):
             self.sensor.update(road_borders, traffics)
@@ -56,13 +56,34 @@ class Car:
              
         return False
 
-    def polygon_points(self, rect):
-        points = [
-        {'x': rect.left, 'y': rect.top},         
-        {'x': rect.right, 'y': rect.top},        
-        {'x': rect.left, 'y': rect.bottom},      
-        {'x': rect.right, 'y': rect.bottom}      
-    ]
+    # def polygon_points(self, rect):
+    #     points = [
+    #     {'x': rect.left, 'y': rect.top},         
+    #     {'x': rect.right, 'y': rect.top},        
+    #     {'x': rect.left, 'y': rect.bottom},      
+    #     {'x': rect.right, 'y': rect.bottom}      
+    # ]
+    #     return points
+    def polygon_points(self):
+        points=[]
+        rad=math.hypot(self.width,self.height)/2
+        alpha=math.atan2(self.width,self.height)
+        points.append({
+            'x': self.x-math.sin(self.angle-alpha)*rad,
+            'y': self.y-math.cos(self.angle-alpha)*rad
+        })
+        points.append({
+            'x': self.x-math.sin(self.angle+alpha)*rad,
+            'y': self.y-math.cos(self.angle+alpha)*rad
+        })
+        points.append({
+            'x': self.x-math.sin(math.pi+self.angle-alpha)*rad,
+            'y': self.y-math.cos(math.pi+self.angle-alpha)*rad
+        })
+        points.append({
+            'x': self.x-math.sin(math.pi+self.angle+alpha)*rad,
+            'y': self.y-math.cos(math.pi+self.angle+alpha)*rad
+        })
         return points
         
     def move(self):
