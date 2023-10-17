@@ -52,13 +52,13 @@ while running:
     our_road.draw(screen, camera_y)
 
     #Update the player car
-    player_car.update(keys, our_road.borders, our_road.border_lines, traffics)
+    player_car.update(keys, our_road.borders, traffics)
     #Draw the player car
     player_car.draw(screen, camera_y)
 
-    for t in traffics:
-        t.update(None,[],[],[])
-        t.draw(screen, camera_y)
+    for traffic in traffics:
+        traffic.update(None,[],[])
+        traffic.draw(screen, camera_y)
 
     #Update the display
     pygame.display.flip()

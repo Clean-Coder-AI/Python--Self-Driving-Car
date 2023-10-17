@@ -22,17 +22,6 @@ class Road:
             [top_left, bottom_left],
             [top_right, bottom_right]
         ]    
-        # self.border_rect=pygame.Rect(top_left['x'], top_left['y'], top_right['x'] - top_left['x'], bottom_left['y'] - top_left['y'])
-
-        #Define borders line for clipline()
-        left_line=((self.x,self.y), (self.x,self.y+self.height))
-        right_line=((self.x+self.width,self.y), (self.x+self.width,self.y+self.height))
-
-        a=((315,0), (315,100000))
-        b=((510,0), (510,100000))
-
-        self.border_lines=[a,b]
-        # self.border_lines=[left_line, right_line]
 
     def get_lane_center(self, lane_index):
         lane_width=self.width/self.lane_count

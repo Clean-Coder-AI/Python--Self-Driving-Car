@@ -35,21 +35,25 @@ class Car:
         self.polygon=self.polygon_points()
 
     
-    def update(self, keys, road_borders, border_lines, traffics):
+    def update(self, keys, road_borders, traffics):
         if not self.damaged:
             self.controls.update(keys)
             self.move()
             self.rect.topleft = (self.x, self.y)
             self.polygon=self.polygon_points()
-            self.damaged=self.check_damage(border_lines,traffics)
+            self.damaged=self.check_damage(road_borders,traffics)
         if hasattr(self,'sensor'):
             self.sensor.update(road_borders, traffics)
         
-    def check_damage(self, border_lines, traffics):
-        for line in border_lines:
-            if self.rect.clipline(line):
-                print("Collide!")
-                return True     
+    def check_damage(self, road_borders, traffics):
+        road_lines = []
+        for border in road_borders:
+            top, bottom = border[0], border[1]
+            road_lines.append((top, bottom))
+        for line in road_lines:
+            if self.rect.clipline((line[0]['x']+self.width, line[0]['y'], line[1]['x'], line[1]['y'])):
+                return True  
+            
         for traffic in traffics:
             if self.rect.colliderect(traffic.rect):
                 return True     
